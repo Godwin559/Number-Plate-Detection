@@ -1,0 +1,34 @@
+pip install opencv-python-headless easyocr streamlit numpy 
+pip install easyocr  
+import cv2 
+import easyocr  
+import numpy as np 
+import matplotlib.pyplot as plt 
+ # Path to the input images 
+ IMAGE_PATHS = ['/content/WhatsApp Image 2025-05-11 at 17.44.19_f626356c.jpg', 
+'/content/WhatsApp Image 2025-05-11 at 17.44.20_92c315bf.jpg'] 
+ # Process each image individually 
+for image_path in IMAGE_PATHS: 
+ # Load the image
+image = cv2.imread(image_path)
+if image is None: 
+ raise FileNotFoundError(f"Image not found at path: {image_path}")  
+# Convert BGR to RGB for visualization 
+image_rgb = cv2.cvtColor(image, cv2.COLOR_BGR2RGB) 
+ # Convert to grayscale 
+gray_image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY) 
+ # Detect edges using Canny edge detection  edges = cv2.Canny(gray_image, threshold1=100, threshold2=200)  
+# Initialize EasyOCR Reader  reader = easyocr.Reader(['en'], gpu=False)  # Perform OCR on the original image (BGR)  results = reader.readtext(image)  # Draw results on a copy of the image  image_with_boxes = image.copy()  
+for (bbox, text, prob) in results:  if prob > 0.5:  
+pip install opencv-python-headless easyocr streamlit numpy  pip install easyocr  import cv2  import easyocr  import numpy as np  import matplotlib.pyplot as plt 
+ # Path to the input images 
+ IMAGE_PATHS = ['/content/WhatsApp Image 2025-05-11 at 17.44.19_f626356c.jpg', 
+'/content/WhatsApp Image 2025-05-11 at 17.44.20_92c315bf.jpg'] 
+ # Process each image individually  for image_path in IMAGE_PATHS: 
+ # Load the image image = cv2.imread(image_path)  if image is None: 
+ raise FileNotFoundError(f"Image not found at path: {image_path}")  
+# Convert BGR to RGB for visualization  image_rgb = cv2.cvtColor(image, cv2.COLOR_BGR2RGB) 
+ # Convert to grayscale  gray_image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY) 
+ # Detect edges using Canny edge detection  edges = cv2.Canny(gray_image, threshold1=100, threshold2=200)  
+# Initialize EasyOCR Reader  reader = easyocr.Reader(['en'], gpu=False)  # Perform OCR on the original image (BGR)  results = reader.readtext(image)  # Draw results on a copy of the image  image_with_boxes = image.copy()  
+for (bbox, text, prob) in results:  if prob > 0.5:  
